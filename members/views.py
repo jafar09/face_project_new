@@ -59,8 +59,6 @@ def LogoutPage(request):
     logout(request)
     return redirect('login')
 
-
-
 def project_add(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
@@ -70,13 +68,13 @@ def project_add(request):
     else:
         form = ProjectForm()
 
-        data=Member.objects.all()
-        context = {
-            'form': form,
-            'data':data,
-        }
-        return render(request, "project_add.html", context)     
-
+    data = Member.objects.all()
+    context = {
+        'form': form,
+        'data': data,
+    }
+    return render(request, "project_add.html", context)
+    
 
 def project_show(request):
     data=Member.objects.all()
