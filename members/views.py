@@ -8,19 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # @login_required(login_url='login')
+
 def home(request):
     form = ProjectForm()
     context={
         'form':form,
     }
     return render(request, "home.html",context)
-
-
-
-def test(request):  
-    return render(request,'test.html')
-
-
 
 
 def signup(request):
