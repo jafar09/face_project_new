@@ -4,19 +4,16 @@ from .forms import ProjectForm
 # Create your views here.
 from django.contrib.auth.models import User
 from django.contrib.auth import login , authenticate , login, logout 
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from .models import Member
 # @login_required(login_url='login')
 
+# home view
 def home(request):
-    form = ProjectForm()
-    context={
-        'form':form,
-    }
-    return render(request, "home.html",context)
+    return render(request, "home.html")
+# home view tugadi
 
-
+# signup view
 def signup(request):
     if request.method =="POST":
         username = request.POST.get('username')
@@ -32,8 +29,9 @@ def signup(request):
             return redirect("login")
 
     return render(request, 'signup.html')
+# signup view
 
-
+# custom_login view
 def custom_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -47,35 +45,63 @@ def custom_login(request):
             return render(request, 'login.html')  # Render login page with error message
     else:
         return render(request, 'login.html')  # Render login page for GET requests
+# custom_login view tugadi
 
-
+# LogoutPage view
 def LogoutPage(request):
     logout(request)
     return redirect('login')
+# LogoutPage view
 
+
+# project_add View
 def project_add(request):
+    form=ProjectForm()
     if request.method == 'POST':
         form = ProjectForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = ProjectForm()
+        form.save()
+        form=ProjectForm()
 
-    data = Member.objects.all()
+    data=Member.objects.all()
+
     context = {
         'form': form,
         'data': data,
     }
     return render(request, "project_add.html", context)
-    
+# project_add View tugadi
 
+    
+#project show View 
 def project_show(request):
     data=Member.objects.all()
     context = {
         'data':data,
     }
     return render(request, "projects.html", context)     
+#project show View tugadi
 
 
+# Delete View
+def delete_record(request,id):
+    a=Member.objects.get(pk=id)
+    a.delete()
+    return redirect('projects')
+# Delete View tugadi
+    
 
+    # Update View 
+def Update_Record(request,id):
+    if request.method=='POST':
+        data=Member.objects.get(pk=id)
+        form = ProjectForm(instance=data)
+        if form.is_valid():
+            form.save()
+    else:
+        data=Member.objects.get(pk=id)
+        form=ProjectForm(instance=data)
+    context={
+        'form':form,
+    }
+    return render(request,'update.html',context)
+# update view tugadi

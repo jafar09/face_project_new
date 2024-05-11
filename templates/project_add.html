@@ -1,6 +1,11 @@
 {% extends 'home.html'%}
 
+
+
 {% block content %}
+
+
+    <!-- Forms  -->
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}

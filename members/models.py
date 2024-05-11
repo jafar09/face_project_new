@@ -6,7 +6,7 @@ from django.db import models
 class Member(models.Model):
     first_name = models.CharField(max_length=70, null=True, blank=True)
     last_name = models.CharField(max_length=70, null=True, blank=True)
-    phone = models.IntegerField(null=True , blank=True, default='+998')
+    phone = models.IntegerField(null=True , blank=True)
     email = models.EmailField(default='info@ise.uz')
     GENDER_CHOICES = (('M', 'Male'),('F', 'Female'),)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
