@@ -4,14 +4,14 @@ from django.db import models
 
 
 class Member(models.Model):
-    first_name = models.CharField(max_length=70, null=True, blank=True)
+    first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70, null=True, blank=True)
-    phone = models.IntegerField(null=True , blank=True)
-    email = models.EmailField(default='info@ise.uz')
-    GENDER_CHOICES = (('M', 'Male'),('F', 'Female'),)
+    phone = models.IntegerField(null=True ,blank=True)
+    email = models.EmailField(default="figma@gmail.com")
+    GENDER_CHOICES = (('M', 'Male'),('F', 'Female'))
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     joined_date = models.DateField(null=True,blank=True )
-    image = models.ImageField(default='no-image.jpg')
+    image = models.ImageField(default='image.jpg')
     description = models.TextField(null=True, blank=True, default="text")
 
 
